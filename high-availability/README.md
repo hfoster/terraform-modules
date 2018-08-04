@@ -1,4 +1,4 @@
-# Terraform common-infrastructure module
+# Terraform HA-infrastructure module
 
 Creates a VPC and the other required infrastructure for a High Availability environment.
 
