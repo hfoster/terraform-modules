@@ -1,24 +1,9 @@
 #Elastic IP addresses
-resource "aws_eip" "nat_ip1" {
-  vpc = true
+resource "aws_eip" "nat_ip" {
+  count = "${length(data.aws_availability_zones.available.names)}"
+  vpc   = true
 
   tags {
-    Name = "nat-ip-1"
-  }
-}
-
-resource "aws_eip" "nat_ip2" {
-  vpc = true
-
-  tags {
-    Name = "nat-ip-2"
-  }
-}
-
-resource "aws_eip" "nat_ip3" {
-  vpc = true
-
-  tags {
-    Name = "nat-ip-3"
+    Name = "nat-ip-${count.index}"
   }
 }

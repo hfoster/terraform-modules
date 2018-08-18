@@ -47,7 +47,7 @@ resource "aws_security_group" "ssh_jump" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${aws_subnet.private1.cidr_block}", "${aws_subnet.private2.cidr_block}", "${aws_subnet.private3.cidr_block}"]
+    cidr_blocks = ["${aws_subnet.private.*.cidr_block}"]
   }
 }
 
@@ -59,7 +59,7 @@ resource "aws_security_group" "ssh_in" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${aws_subnet.public1.cidr_block}", "${aws_subnet.public2.cidr_block}", "${aws_subnet.public3.cidr_block}"]
+    cidr_blocks = ["${aws_subnet.public.*.cidr_block}"]
   }
 }
 

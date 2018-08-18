@@ -1,44 +1,18 @@
 #Subnet routing rules
-resource "aws_route_table" "private_routing1" {
+resource "aws_route_table" "private_routing" {
+  count  = "${length(data.aws_availability_zones.available.names)}"
   vpc_id = "${aws_vpc.main.id}"
 
   route {
     cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = "${aws_nat_gateway.nat1.id}"
+    nat_gateway_id = "${aws_nat_gateway.nat.*.id[count.index]}"
   }
 }
 
-resource "aws_route_table_association" "pri1" {
-  subnet_id      = "${aws_subnet.private1.id}"
-  route_table_id = "${aws_route_table.private_routing1.id}"
-}
-
-resource "aws_route_table" "private_routing2" {
-  vpc_id = "${aws_vpc.main.id}"
-
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = "${aws_nat_gateway.nat2.id}"
-  }
-}
-
-resource "aws_route_table_association" "pri2" {
-  subnet_id      = "${aws_subnet.private2.id}"
-  route_table_id = "${aws_route_table.private_routing2.id}"
-}
-
-resource "aws_route_table" "private_routing3" {
-  vpc_id = "${aws_vpc.main.id}"
-
-  route {
-    cidr_block     = "0.0.0.0/0"
-    nat_gateway_id = "${aws_nat_gateway.nat3.id}"
-  }
-}
-
-resource "aws_route_table_association" "pri3" {
-  subnet_id      = "${aws_subnet.private3.id}"
-  route_table_id = "${aws_route_table.private_routing3.id}"
+resource "aws_route_table_association" "pri" {
+  count          = "${length(data.aws_availability_zones.available.names)}"
+  subnet_id      = "${aws_subnet.private.*.id[count.index]}"
+  route_table_id = "${aws_route_table.private_routing.*.id[count.index]}"
 }
 
 resource "aws_route_table" "public_routing" {
@@ -50,17 +24,8 @@ resource "aws_route_table" "public_routing" {
   }
 }
 
-resource "aws_route_table_association" "pub1" {
-  subnet_id      = "${aws_subnet.public1.id}"
-  route_table_id = "${aws_route_table.public_routing.id}"
-}
-
-resource "aws_route_table_association" "pub2" {
-  subnet_id      = "${aws_subnet.public2.id}"
-  route_table_id = "${aws_route_table.public_routing.id}"
-}
-
-resource "aws_route_table_association" "pub3" {
-  subnet_id      = "${aws_subnet.public3.id}"
+resource "aws_route_table_association" "pub" {
+  count          = "${length(data.aws_availability_zones.available.names)}"
+  subnet_id      = "${aws_subnet.public.*.id[count.index]}"
   route_table_id = "${aws_route_table.public_routing.id}"
 }
