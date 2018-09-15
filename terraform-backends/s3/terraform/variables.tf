@@ -3,5 +3,5 @@ variable "aws_region" {
 }
 
 variable "bucket_name" {
-  default = "terraform-backend"
+  default = "hfoster-terraform-backend"
 }
