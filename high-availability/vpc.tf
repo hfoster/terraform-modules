@@ -6,10 +6,6 @@ resource "aws_vpc" "main" {
   enable_dns_hostnames = true
 
   tags {
-    Name = "test-vpc"
+    Name = "${var.env_name}-vpc"
   }
-}
-
-output "main_vpc_id" {
-  value = "${aws_vpc.main.id}"
 }
