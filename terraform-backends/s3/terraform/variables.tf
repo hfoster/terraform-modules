@@ -3,5 +3,5 @@ variable "aws_region" {
 }
 
 variable "bucket_name" {
-  default = "hfoster-terraform-backend"
+  description = "The name of the backend bucket we are creating. Set with the -var switch at plan time."
 }
