@@ -8,6 +8,10 @@ resource "aws_instance" "bastion" {
   subnet_id              = "${aws_subnet.public.*.id[count.index]}"
   vpc_security_group_ids = ["${aws_security_group.bastion.id}"]
 
+  root_block_device {
+    delete_on_termination = true
+  }
+
   tags {
     Name = "${var.env_name}-ssh-bastion-${count.index}"
   }
