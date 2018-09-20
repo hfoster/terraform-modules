@@ -20,16 +20,9 @@ resource "aws_security_group" "elb_security_group" {
   }
 
   egress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
@@ -50,26 +43,17 @@ resource "aws_security_group_rule" "http_ingress" {
   security_group_id        = "${aws_security_group.web.id}"
 }
 
-resource "aws_security_group_rule" "http_egress" {
-  type                     = "egress"
-  from_port                = 80
-  to_port                  = 80
-  protocol                 = "tcp"
-  source_security_group_id = "${aws_security_group.elb_security_group.id}"
-  security_group_id        = "${aws_security_group.web.id}"
+resource "aws_security_group_rule" "all_egress" {
+  type              = "egress"
+  from_port         = 0
+  to_port           = 0
+  protocol          = "-1"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = "${aws_security_group.web.id}"
 }
 
 resource "aws_security_group_rule" "https_ingress" {
   type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  source_security_group_id = "${aws_security_group.elb_security_group.id}"
-  security_group_id        = "${aws_security_group.web.id}"
-}
-
-resource "aws_security_group_rule" "https_egress" {
-  type                     = "egress"
   from_port                = 443
   to_port                  = 443
   protocol                 = "tcp"
