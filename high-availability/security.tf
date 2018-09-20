@@ -52,15 +52,6 @@ resource "aws_security_group_rule" "all_egress" {
   security_group_id = "${aws_security_group.web.id}"
 }
 
-resource "aws_security_group_rule" "https_ingress" {
-  type                     = "ingress"
-  from_port                = 443
-  to_port                  = 443
-  protocol                 = "tcp"
-  source_security_group_id = "${aws_security_group.elb_security_group.id}"
-  security_group_id        = "${aws_security_group.web.id}"
-}
-
 resource "aws_security_group" "bastion" {
   vpc_id                 = "${aws_vpc.main.id}"
   revoke_rules_on_delete = true
