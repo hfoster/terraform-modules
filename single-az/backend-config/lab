@@ -1,0 +1,3 @@
+bucket = "terraform-infrastructure-modules-backend-bucket"
+key    = "modules/single-az/lab.tfstate"
+region = "eu-west-2"
