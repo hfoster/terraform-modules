@@ -17,7 +17,7 @@ Creates a VPC and the other required infrastructure for a fast startup environme
 | Output name           | Details                        |
 | --------------------- | ------------------------------ |
 | main_vpc_id           | ID of the main VPC             |
-| private_subnet_id     | Private subnet ID              |
+| private_subnet_ids    | Private subnet ID              |
 | public_subnet_ids     | Public subnet ID               |
 | elb_security_group_id | ID of the `elb` security group |
 | ssh_security_group_id | ID of the `ssh` security group |
