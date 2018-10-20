@@ -1,6 +1,6 @@
 # Terraform Single-AZ infrastructure module
 
-Creates a VPC and the other required infrastructure for a High Availability environment.
+Creates a VPC and the other required infrastructure for a fast startup environment using a single Availability Zone.
 
 ### Creating
 
