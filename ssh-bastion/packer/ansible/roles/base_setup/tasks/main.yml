@@ -1,0 +1,26 @@
+- name:           "Enable YUM caching"
+  lineinfile:
+    path:         /etc/yum.conf
+    regexp:       "^keepcache"
+    line:         "keepcache=1"
+
+- name:           "Add YUM repo for EPEL"
+  yum_repository:
+    name:         epel
+    description:  Extra Packages for Enterprise Linux
+    baseurl:      http://download.fedoraproject.org/pub/epel/$releasever/$basearch
+    gpgcheck:     yes
+    gpgkey:       https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7Server
+    enabled:      yes
+
+- name:           "Install Extra Packages for Enterprise Linux"
+  yum:
+    name:         epel-release
+    state:        latest
+    update_cache: yes
+
+- name:           "YUM update"
+  yum:
+    name:         "*"
+    state:        latest
+    update_cache: yes

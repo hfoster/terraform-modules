@@ -1,0 +1,13 @@
+- name:           "Remove extraneous packages"
+  yum:
+    name:
+      - ed
+      - ftp
+      - nano
+      - rsync
+      - screen
+      - tmux
+      - vim
+      - wget
+    state:        absent
+    update_cache: yes

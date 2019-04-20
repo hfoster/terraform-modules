@@ -1,0 +1,23 @@
+- name:       "Remove sudo from wheel group"
+  lineinfile:
+    path:     /etc/sudoers
+    regexp:   "^%wheel"
+    state:    absent
+
+- name:       "Deactivate root login"
+  user:
+    name:     root
+    state:    present
+    shell:    /sbin/nologin
+
+- name:       "Setup Restricted BASH"
+  file:
+    src:      /bin/bash
+    dest:     /bin/rbash
+    state:    link
+
+- name:       "Activate Restricted BASH"
+  replace:
+    path:     /etc/passwd
+    regexp:   '\/bin\/bash$'
+    replace:  '/bin/rbash'
