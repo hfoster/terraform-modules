@@ -8,6 +8,7 @@
 | ec2_key_pair      | Key pair for Bastion creation and access |
 | public_subnet_ids | List of public subnet IDs                |
 | env_name          | Target environment name                  |
+| vpc_id            | ID of the target VPC                     |
 
 ### Presents the following outputs:
 
