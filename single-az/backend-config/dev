@@ -1,3 +1,0 @@
-bucket = "terraform-infrastructure-modules-backend-bucket"
-key    = "modules/single-az/dev.tfstate"
-region = "eu-west-2"

@@ -1,3 +1,0 @@
-bucket = "terraform-infrastructure-modules-backend-bucket"
-key    = "modules/high-availability/dev.tfstate"
-region = "eu-west-2"
