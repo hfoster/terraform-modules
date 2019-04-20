@@ -14,3 +14,7 @@ variable "ec2_key_pair" {
 variable "env_name" {
   description = "The name of the environent we're building."
 }
+
+variable "vpc_id" {
+  description = "ID of the target VPC."
+}
