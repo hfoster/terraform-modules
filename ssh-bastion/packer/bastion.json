@@ -10,6 +10,7 @@
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
       "region": "{{user `aws_region`}}",
+      "ami_regions": ["eu-west-1", "eu-west-2"],
       "source_ami_filter": {
         "filters": {
           "virtualization-type": "hvm",
@@ -27,7 +28,7 @@
         "OS_Version": "CentOS",
         "Release": "7",
         "Base_AMI_Name": "{{ .SourceAMIName }}",
-        "Name": "CentOS_Linux_Bastion_{{isotime | clean_ami_name}}"
+        "Name": "Linux_Bastion_{{isotime | clean_ami_name}}"
       },
       "launch_block_device_mappings": [
         {
