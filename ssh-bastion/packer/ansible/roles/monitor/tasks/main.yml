@@ -1,0 +1,12 @@
+- name:           "Install psacct"
+  yum:
+    name:
+      - psacct
+    state:        latest
+    update_cache: yes
+
+- name:           "Enable user activity monitoring"
+  service:
+    name:         psacct
+    state:        started
+    enabled:      yes 
