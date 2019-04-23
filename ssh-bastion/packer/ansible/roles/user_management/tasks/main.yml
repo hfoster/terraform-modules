@@ -1,23 +1,74 @@
-- name:       "Remove sudo from wheel group"
-  lineinfile:
-    path:     /etc/sudoers
-    regexp:   "^%wheel"
-    state:    absent
+- name:               "Create provisioner group"
+  group:
+    name:             provisioner
+    state:            present
+    gid:              1401
 
-- name:       "Deactivate root login"
+- name:               "Create provisioner user"
   user:
-    name:     root
-    state:    present
-    shell:    /sbin/nologin
+    name:             provisioner
+    state:            present
+    shell:            /bin/bash
+    group:            provisioner
+    generate_ssh_key: yes
+    uid:              1401
 
-- name:       "Setup Restricted BASH"
-  file:
-    src:      /bin/bash
-    dest:     /bin/rbash
-    state:    link
+- name:               "Grant passwordless sudo rights to provisioner group"
+  lineinfile:
+    path:             /etc/sudoers
+    regexp:           '^%provisioner'
+    line: '%provisioner ALL=(ALL) NOPASSWD: ALL'
+    state:            present
 
-- name:       "Activate Restricted BASH"
+- name:               "Deactivate root login shell"
+  user:
+    name:             root
+    state:            present
+    shell:            /sbin/nologin
+
+- name:               "Remove postfix user"
+  user:
+    name:             postfix
+    state:            absent
+
+- name:               "Disable root login (sshd config)"
   replace:
-    path:     /etc/passwd
-    regexp:   '\/bin\/bash$'
-    replace:  '/bin/rbash'
+    path:             /etc/ssh/sshd_config
+    regexp:           '#PermitRootLogin yes'
+    replace:          'PermitRootLogin no'
+
+- name:               "Ensure Public Key Authentication"
+  replace:
+    path:             /etc/ssh/sshd_config
+    regexp:           '#PubkeyAuthentication yes'
+    replace:          'PubkeyAuthentication yes'
+
+- name:               "Disable X11 forwarding"
+  replace:
+    path:             /etc/ssh/sshd_config
+    regexp:           'X11Forwarding yes'
+    replace:          'X11Forwarding no'
+
+- name:               "Enable port forwarding"
+  replace:
+    path:             /etc/ssh/sshd_config
+    regexp:           '#GatewayPorts no'
+    replace:          'GatewayPorts yes'
+
+- name:               "Setup Restricted BASH"
+  file:
+    src:              /bin/bash
+    dest:             /bin/rbash
+    state:            link
+
+- name:               "Activate Restricted BASH"
+  replace:
+    path:             /etc/passwd
+    regexp:           '\/bin\/bash$'
+    replace:          '/bin/rbash'
+
+- name:               "Remove sudo from wheel group"
+  lineinfile:
+    path:             /etc/sudoers
+    regexp:           "^%wheel"
+    state:            absent

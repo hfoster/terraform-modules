@@ -10,5 +10,6 @@
   become:        yes
   become_method: sudo
   roles:
+    - monitor
     - package_removal
-#    - user_management
+    - user_management
