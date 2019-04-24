@@ -9,7 +9,7 @@ data "aws_ami" "bastion" {
 
   filter {
     name   = "name"
-    values = ["CentOS Linux 7*"] #Change this
+    values = ["Bastion_AMI_built_with_Packer*"]
   }
 
   filter {
