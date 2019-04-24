@@ -12,6 +12,7 @@
     group:            provisioner
     generate_ssh_key: yes
     uid:              1401
+    system:           true
 
 - name:               "Grant passwordless sudo rights to provisioner group"
   lineinfile:
@@ -72,3 +73,9 @@
     path:             /etc/sudoers
     regexp:           "^%wheel"
     state:            absent
+
+- name:               "Restart SSH"
+  service:
+    name:             sshd
+    state:            restarted
+    enabled:          yes

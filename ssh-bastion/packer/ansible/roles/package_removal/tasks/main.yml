@@ -3,6 +3,7 @@
     name:         postfix
     state:        stopped
     enabled:      no
+  ignore_errors:  true
 
 - name:           "Remove extraneous packages"
   yum:
