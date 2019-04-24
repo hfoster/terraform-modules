@@ -16,7 +16,7 @@
   register:           provisioner_user
 
 - name:               "Get the Provisioner user's public key"
-  shell:              echo {{ item }} > {{ inventory_hostname }}_provisioner_id_rsa.pub
+  shell:              echo {{ item }} > {{ inventory_hostname }}_{{ ansible_date_time.iso8601_basic_short }}_provisioner_id_rsa.pub
   with_items:
     - "{{ provisioner_user.ssh_public_key }}"
   delegate_to:        localhost
