@@ -13,12 +13,20 @@
     generate_ssh_key: yes
     uid:              1401
     system:           true
+  register:           provisioner_user
+
+- name:               "Get the Provisioner user's public key"
+  shell:              echo {{ item }} >> provisioner_id_rsa.pub
+  with_items:
+    - "{{ provisioner_user.ssh_public_key }}"
+  delegate_to:        localhost
+  become:             no
 
 - name:               "Grant passwordless sudo rights to provisioner group"
   lineinfile:
     path:             /etc/sudoers
     regexp:           '^%provisioner'
-    line: '%provisioner ALL=(ALL) NOPASSWD: ALL'
+    line:             '%provisioner ALL=(ALL) NOPASSWD: ALL'
     state:            present
 
 - name:               "Deactivate root login shell"
