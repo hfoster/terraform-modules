@@ -24,10 +24,11 @@
 
 - name:               "Grant passwordless sudo rights to provisioner group"
   lineinfile:
-    path:             /etc/sudoers
+    path:             /etc/sudoers.d/provisioner
     regexp:           '^%provisioner'
     line:             '%provisioner ALL=(ALL) NOPASSWD: ALL'
     state:            present
+    create:           yes
 
 - name:               "Deactivate root login shell"
   user:
@@ -39,6 +40,11 @@
   user:
     name:             postfix
     state:            absent
+
+- name:               "Disable Ctrl + Alt + Del"
+  shell:              |
+    systemctl mask ctrl-alt-del.target
+    systemctl daemon-reload
 
 - name:               "Disable root login (sshd config)"
   replace:
@@ -76,10 +82,16 @@
     regexp:           '\/bin\/bash$'
     replace:          '/bin/rbash'
 
-- name:               "Remove sudo from wheel group"
+- name:               "Remove sudo from wheel group (1/2)"
   lineinfile:
     path:             /etc/sudoers
     regexp:           "^%wheel"
+    state:            absent
+
+- name:               "Remove sudo from wheel group (2/2)"
+  lineinfile:
+    path:             /etc/sudoers
+    regexp:           "^#\ %wheel"
     state:            absent
 
 - name:               "Restart SSH"
@@ -87,3 +99,6 @@
     name:             sshd
     state:            restarted
     enabled:          yes
+  notify:
+    - reboot_now
+    - await_restart
