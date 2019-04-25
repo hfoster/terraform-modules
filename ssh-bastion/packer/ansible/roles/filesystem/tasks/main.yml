@@ -1,0 +1,5 @@
+- name:       "Make /boot readonly"
+  lineinfile:
+    path:     /etc/fstab
+    line:     "LABEL=/boot     /boot     ext2     defaults,ro     1 2"
+    state:    present
