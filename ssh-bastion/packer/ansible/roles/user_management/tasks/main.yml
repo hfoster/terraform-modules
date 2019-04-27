@@ -7,10 +7,13 @@
 - name:               "Create provisioner user"
   user:
     name:             provisioner
+    comment:          Provisioner System User
     state:            present
     shell:            /bin/bash
     group:            provisioner
     generate_ssh_key: yes
+    ssh_key_bits:     2048
+    ssh_key_comment:  provisioner@{{ inventory_hostname }}
     uid:              1401
     system:           true
   register:           provisioner_user
