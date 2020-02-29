@@ -1,8 +1,8 @@
 resource "aws_security_group" "bastion" {
-  vpc_id                 = "${var.vpc_id}"
+  vpc_id                 = var.vpc_id
   revoke_rules_on_delete = true
-  name                   = "${var.env_name}-bastion-security-group"
-  description            = "Security Group for SSH traffic via bastion"
+  name                   = join("-", [var.env_name, "bastion", "security", "group"])
+  description            = "Security Group for SSH traffic to Bastion"
 
   ingress {
     from_port   = 22
@@ -20,10 +20,10 @@ resource "aws_security_group" "bastion" {
 }
 
 resource "aws_security_group" "ssh" {
-  vpc_id                 = "${var.vpc_id}"
+  vpc_id                 = var.vpc_id
   revoke_rules_on_delete = true
-  name                   = "${var.env_name}-ssh-security-group"
-  description            = "Security Group for SSH traffic from the bastions"
+  name                   = join("-", [var.env_name, "ssh", "security", "group"])
+  description            = "Security Group for SSH traffic from Bastion"
 }
 
 resource "aws_security_group_rule" "ssh_ingress" {
@@ -31,6 +31,6 @@ resource "aws_security_group_rule" "ssh_ingress" {
   from_port                = 22
   to_port                  = 22
   protocol                 = "tcp"
-  source_security_group_id = "${aws_security_group.bastion.id}"
-  security_group_id        = "${aws_security_group.ssh.id}"
+  source_security_group_id = aws_security_group.bastion.id
+  security_group_id        = aws_security_group.ssh.id
 }

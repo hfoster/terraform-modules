@@ -1,4 +1,4 @@
-# Terraform SSH Bastion module
+# Terraform module: SSH Bastion
 
 ### Requires the following inputs:
 
