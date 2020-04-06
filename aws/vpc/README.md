@@ -9,6 +9,7 @@
 
 ### Presents the following outputs:
 
-| Output name | Description        |
-| ----------- | ------------------ |
-| vpc_id      | ID of the main VPC |
+| Output name | Description           |
+| ----------- | --------------------- |
+| vpc_id      | ID of the main VPC    |
+| vpc_cidr    | CIDR block of the VPC |
