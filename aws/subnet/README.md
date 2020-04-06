@@ -2,11 +2,13 @@
 
 ### Requires the following inputs:
 
-| Input name | Description                                     |
-| ---------- | ----------------------------------------------- |
-| vpc_id     | The Terraform ID of the target VPC              |
-| env_name   | The name of the environent we're building       |
-| offset     | Set >= 1 to create more than one set of subnets |
+| Input name     | Description                                                          |
+| -------------- | -------------------------------------------------------------------- |
+| vpc_id         | The Terraform ID of the target VPC                                   |
+| env_name       | The name of the environent we're building                            |
+| offset         | Set >= 1 to create more than one set of subnets                      |
+| vpc_cidr       | The host VPC's CIDR block                                            |
+| subnet_newbits | The offset from the VPC netmask to the subnet netmask. Defaults to 8 |
 
 ### Presents the following outputs:
 
