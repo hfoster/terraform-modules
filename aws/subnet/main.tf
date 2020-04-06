@@ -1,7 +1,7 @@
 resource "aws_subnet" "default" {
   count             = local.num_azs
   vpc_id            = var.vpc_id
-  cidr_block        = join(".", ["10", "0", count.index + var.offset, "0/24"])
+  cidr_block        = cidrsubnet(var.vpc_cidr, var.subnet_newbits, count.index + var.offset)
   availability_zone = data.aws_availability_zones.available.names[count.index]
 
   tags {
