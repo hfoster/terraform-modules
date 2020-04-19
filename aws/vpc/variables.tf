@@ -6,3 +6,13 @@ variable "vpc_cidr_block" {
 variable "env_name" {
   description = "The name of the target environent."
 }
+
+variable "dns_support" {
+  description = "Switch for enabling DNS support."
+  default     = true
+}
+
+variable "dns_hostnames" {
+  description = "Switch for enabling DNS hostnames."
+  default     = true
+}
