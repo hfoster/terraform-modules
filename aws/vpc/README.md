@@ -6,6 +6,8 @@
 | -------------- | ----------------------------------------- |
 | vpc_cidr_block | The base CIDR block for the VPC           |
 | env_name       | The name of the environent we're building |
+| dns_support    | Switch for enabling DNS support           |
+| dns_hostnames  | Switch for enabling DNS hostnames         |
 
 ### Presents the following outputs:
 
