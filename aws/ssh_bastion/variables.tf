@@ -25,12 +25,15 @@ variable "public_subnet_ids" {
 
 variable "ec2_key_pair" {
   description = "The AWS Key Pair for accessing hosts."
+  type        = "string"
 }
 
 variable "env_name" {
   description = "The name of the environent we're building."
+  type        = "string"
 }
 
 variable "vpc_id" {
   description = "ID of the target VPC."
+  type        = "string"
 }
