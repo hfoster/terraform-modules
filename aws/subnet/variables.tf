@@ -4,11 +4,6 @@ locals {
   num_azs = length(data.aws_availability_zones.available.names)
 }
 
-variable "env_name" {
-  description = "The name of the target environment."
-  type        = string
-}
-
 variable "vpc_id" {
   description = "ID of the target VPC."
   type        = string

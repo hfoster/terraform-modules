@@ -4,11 +4,6 @@ variable "vpc_cidr_block" {
   type        = string
 }
 
-variable "env_name" {
-  description = "The name of the target environent."
-  type        = string
-}
-
 variable "dns_support" {
   description = "Switch for enabling DNS support."
   default     = true
