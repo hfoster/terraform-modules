@@ -25,3 +25,9 @@ variable "offset" {
   default     = 0
   type        = number
 }
+
+variable "public_ip" {
+  description = "Set to true for public subnets"
+  default = false
+  type = bool
+}
