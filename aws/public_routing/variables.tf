@@ -16,5 +16,5 @@ variable "igw_id" {
 
 variable "public_subnet_ids" {
   description = "List of public subnet IDs"
-  type        = list
+  type        = list(string)
 }

@@ -6,7 +6,7 @@ locals {
 
 variable "nat_gateway_ids" {
   description = "List of NAT Gateway IDs"
-  type        = list
+  type        = list(string)
 }
 
 variable "vpc_id" {
@@ -16,5 +16,5 @@ variable "vpc_id" {
 
 variable "private_subnet_ids" {
   description = "List of private subnet IDs"
-  type        = list
+  type        = list(string)
 }
