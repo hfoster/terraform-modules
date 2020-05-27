@@ -20,20 +20,20 @@ locals {
 
 variable "public_subnet_ids" {
   description = "A list of public subnet IDs."
-  type        = "list"
+type        = list
 }
 
 variable "ec2_key_pair" {
   description = "The AWS Key Pair for accessing hosts."
-  type        = "string"
+  type        = string
 }
 
 variable "env_name" {
   description = "The name of the environent we're building."
-  type        = "string"
+  type        = string
 }
 
 variable "vpc_id" {
   description = "ID of the target VPC."
-  type        = "string"
+  type        = string
 }

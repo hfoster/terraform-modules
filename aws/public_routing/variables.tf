@@ -6,15 +6,15 @@ locals {
 
 variable "vpc_id" {
   description = "ID of the target Internet Gateway"
-  type        = "string"
+  type        = string
 }
 
 variable "igw_id" {
   default = "ID of the target Internet Gateway"
-  type    = "string"
+  type    = string
 }
 
 variable "public_subnet_ids" {
   description = "List of public subnet IDs"
-  type        = "list"
+  type        = list
 }
