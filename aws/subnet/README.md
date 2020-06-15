@@ -9,6 +9,7 @@
 | vpc_cidr       | The host VPC's CIDR block                                                                    |
 | subnet_newbits | The offset from the VPC netmask to the subnet netmask. Defaults to 8                         |
 | public_ip      | Set to true for public subnet. Defaults to false                                             |
+| subnet_tags    | An optional map of tags                                                                      |
 
 ### Presents the following outputs:
 

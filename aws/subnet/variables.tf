@@ -28,6 +28,12 @@ variable "offset" {
 
 variable "public_ip" {
   description = "Set to true for public subnets"
-  default = false
-  type = bool
+  default     = false
+  type        = bool
+}
+
+variable "subnet_tags" {
+  description = "Optional tags"
+  type        = map(string)
+  default     = {}
 }
