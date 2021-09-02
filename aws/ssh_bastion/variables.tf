@@ -20,7 +20,7 @@ locals {
 
 variable "public_subnet_ids" {
   description = "A list of public subnet IDs."
-  type        = list
+  type        = list(any)
 }
 
 variable "ec2_key_pair" {
