@@ -1,3 +1,5 @@
 resource "aws_iam_role" "role" {
-  assume_role_policy = file("")
+  name               = var.name
+  path               = var.path
+  assume_role_policy = var.policy_json
 }
