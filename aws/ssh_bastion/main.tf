@@ -1,6 +1,6 @@
 resource "aws_instance" "bastion" {
   count                  = local.num_azs
-  ami                    = data.aws_ami.bastion.id
+  ami                    = var.bastion_ami
   instance_type          = "t2.nano"
   availability_zone      = data.aws_availability_zones.available.names[count.index]
   key_name               = var.ec2_key_pair
